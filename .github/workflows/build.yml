@@ -29,12 +29,10 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name: Change wrapper permissions
-        run: chmod +x ./app/AplicacionGSAudios/gradlew
-        run: chmod +x ./app/Aplicacion/gradlew
-        run: chmod +x ./app/AplicacionFinal/gradlew
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube --info
+        run: ./app/Aplicacion/gradlew build sonarqube --info
+        run: ./app/AplicacionGSAudios/gradlew build sonarqube --info
+        run: ./app/AplicacionFinal/gradlew build sonarqube --info
